@@ -1,7 +1,10 @@
-
-/* GET travel view */
+/* GET Travel view */
 const travel = (req, res) => {
-    res.render('travel', {title: 'Travlr Getaways'});
+    pageTitle = process.env.npm_package_description + ' - Travel';
+    res.render('travel', {
+        title: pageTitle, 
+        isTravelPage : true
+    });
 };
 
 module.exports = {

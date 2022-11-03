@@ -1,26 +1,26 @@
 <div id="footer">
     <div>
         <ul class="navigation">
-            <li>
-                <a href="index.html">Home</a>
+            <li {{#if isHomePage}} class = "active" {{/if}}>
+                <a href="/">Home</a>
             </li>
-            <li class="active">
-                <a href=“travel.html">Travel</a>
+            <li {{#if isTravelPage}} class = "active" {{/if}}>
+                <a href="/travel">Travel</a>
             </li>
-            <li>
-                <a href="rooms.html">Rooms</a>
+            <li {{#if isRoomsPage}} class = "active" {{/if}}>
+                <a href="/rooms">Rooms</a>
             </li>
-            <li>
-                <a href=“meals.html">Meals</a>
+            <li {{#if isMealsPage}} class = "active" {{/if}}>
+                <a href="/meals">Meals</a>
             </li>
-            <li>
-                <a href="news.html">News</a>
+            <li {{#if isNewsPage}} class = "active" {{/if}}>
+                <a href="/news">News</a>
             </li>
-            <li>
-                <a href="about.html">About</a>
+            <li {{#if isAboutPage}} class = "active" {{/if}}>
+                <a href="/about">About</a>
             </li>
-            <li>
-                <a href="contact.html">Contact</a>
+            <li {{#if isContactPage}} class = "active" {{/if}}>
+                <a href="/contact">Contact</a>
             </li>
         </ul>
         <div id="connect">
@@ -28,6 +28,8 @@
         </div>
     </div>
     <p>
-        © 2023 by BHACCASYONIZTAS BEACH RESORT. All Rights Reserved
+        © 2023 by Travlr Getaways. All Rights Reserved
     </p>
 </div>
+
+
