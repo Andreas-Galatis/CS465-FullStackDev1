@@ -1,5 +1,10 @@
+/* GET Main view */
 const index = (req, res) => { 
-    res.render('index', {title: 'travlr getaways'});
+    pageTitle = process.env.npm_package_description + ' - Main';
+    res.render('index', {
+        title: pageTitle,
+        isHomePage: true
+    });
 };
 
 module.exports = {
