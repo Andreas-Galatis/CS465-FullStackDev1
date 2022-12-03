@@ -27,15 +27,15 @@ export class TripListingComponent implements OnInit {
       this.router.navigate(['add-trip']);
     }
 
-  private getTrips(): void {
-    console.log('Inside TripListingComponent#getTrips');
-    this.message = 'Searching for Trips';
-    this.tripDataService
-      .getTrips()
-        .then(foundTrips => {
-          this.message = foundTrips.length > 0 ? '' : 'No trips found';
-          this.trips = foundTrips;
-        });
+    private getTrips(): void {
+      console.log('Inside TripListingComponent#getTrips');
+      this.message = 'Searching for Trips';
+      this.tripDataService
+        .getTrips()
+          .then(foundTrips => {
+            this.message = foundTrips.length > 0 ? '' : 'No trips found';
+            this.trips = foundTrips;
+          });
   }
 
   ngOnInit(): void {
