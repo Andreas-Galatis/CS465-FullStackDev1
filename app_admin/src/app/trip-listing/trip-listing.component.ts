@@ -48,4 +48,4 @@ export class TripListingComponent implements OnInit {
     this.getTrips();
   }
 
-}
+} 

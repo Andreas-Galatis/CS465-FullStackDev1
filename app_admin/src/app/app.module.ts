@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -16,6 +16,9 @@ import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
   declarations: [
     AppComponent,
     TripListingComponent,
@@ -36,6 +39,7 @@ import { HomeComponent } from './home/home.component';
   providers: [
     TripDataService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent
+  ]
 })
 export class AppModule { }
