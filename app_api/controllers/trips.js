@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');  //.set('debug', true);
 const Trip = mongoose.model('trips');
+const User = mongoose.model('users');
 
 // GET: /trips - lists all the trips
 const tripsList = async (req, res) => {
@@ -47,7 +48,9 @@ const tripsFindCode = async (req, res) => {
 
 // POST
 const tripsAddTrip = async (req, res) => {
-    Trip
+    getUser(req, res,
+        (req, res) => { 
+            Trip
         .create({ 
             code: req.body.code,
             name: req.body.name,
@@ -69,12 +72,18 @@ const tripsAddTrip = async (req, res) => {
                     .json(trip);
             }
         });
+
+        }
+    );
+    
 };
 
 // PUT
 const tripsUpdateTrip = async (req, res) => {
     console.log(req.body);
-    Trip
+    getUser(req, res,
+        (req, res) => {
+            Trip
         .findOneAndUpdate({ 'code': req.params.tripCode }, {
             code: req.body.code,
             name: req.body.name,
@@ -106,11 +115,63 @@ const tripsUpdateTrip = async (req, res) => {
                 .status(500) // server error
                 .json(err);
         });       
+
+        }
+    );
+    
 };
+
+// DELETE: 
+const tripDelete = async (req, res) => {
+    Trip
+        .findOneAndRemove({ 'code': req.params.tripCode }) 
+        .exec((err, trip) => {
+            if (!trip) {
+                return res
+                    .status(404)
+                    .json({ "message": "trip not found"});
+            } else if (err) {
+                return res
+                    .status(404) 
+                    .json(err);
+            } else {
+                return res
+                    .status(200)
+                    .json(trip);
+            }
+        });
+};
+
+
+const getUser = (req, res, callback) => {
+    if (req.auth && req.auth.email) {
+        User
+            .findOne({ email: req.auth.email })
+            .exec((err, user) => {
+                if (!user) {
+                    return res
+                        .status(404)
+                        .json({"message": "User not founf" });
+                } else if (err) {
+                    console.log(err);
+                    return res
+                        .status(404)
+                        .json(err) ;                   
+                }
+                callback(req, res, user.name);
+            })
+    } else {
+        return res
+            .status(404)
+            .json({"message": "User not found" });
+    }
+    
+}
 
 module.exports = {
     tripsList,
     tripsFindCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripDelete
 };
